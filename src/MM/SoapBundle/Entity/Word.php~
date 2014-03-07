@@ -1,0 +1,114 @@
+<?php
+
+namespace MM\SoapBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Doctrine\ORM\Mapping\Index;
+
+/**
+ * Word
+ *
+ * @ORM\Table(
+ *  uniqueConstraints={@UniqueConstraint(name="message_unique",columns={"message"})},
+ *  indexes={@index(name="message_idx", columns={"message"})}
+ * )
+ * @ORM\Entity(repositoryClass="MM\SoapBundle\Entity\WordRepository")
+ */
+class Word
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Word", mappedBy="similars")
+     */
+    private $similarities;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Word", inversedBy="similarities")
+     * @ORM\JoinTable(name="words_words")
+     */
+    private $similars;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="string", length=100, unique=true)
+     */
+    private $message;
+
+    /**
+     * @ORM\Column(name="count", type="integer")
+     */
+    private $count;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Website", inversedBy="words")
+     * @ORM\JoinColumn(name="website_id", referencedColumnName="id")
+     */
+    private $website;
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set string
+     *
+     * @param string $string
+     * @return Word
+     */
+    public function setString($string)
+    {
+        $this->string = $string;
+
+        return $this;
+    }
+
+    /**
+     * Get string
+     *
+     * @return string 
+     */
+    public function getString()
+    {
+        return $this->string;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     * @return Word
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+}

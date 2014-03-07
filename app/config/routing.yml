@@ -1,0 +1,5 @@
+mm_bundle_soap:
+    resource: "@MMSoapBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
