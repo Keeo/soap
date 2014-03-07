@@ -36,6 +36,7 @@ class WordController extends Controller
     
     /**
      * @Route("/show/{websiteName}")
+     * @Template()
      */
     public function showStatisticsAction($websiteName)
     {
