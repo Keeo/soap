@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping\Index;
  * Word
  *
  * @ORM\Table(
- *  uniqueConstraints={@UniqueConstraint(name="message_unique",columns={"message"})},
- *  indexes={@index(name="message_idx", columns={"message"})}
+ *  uniqueConstraints={@UniqueConstraint(name="message_website_unique",columns={"message", "website_id"})},
+ *  indexes={@index(name="message_idx", columns={"message","website_id"})}
  * )
  * @ORM\Entity(repositoryClass="MM\SoapBundle\Entity\WordRepository")
  */
@@ -41,7 +41,7 @@ class Word
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="string", length=100, unique=true)
+     * @ORM\Column(name="message", type="string", length=100)
      */
     private $message;
 

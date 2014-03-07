@@ -1,0 +1,22 @@
+{% extends "MMSoapBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/mmsoap/css/table.css') }}" rel="stylesheet" />
+{% endblock %}
+            
+
+{% block body %}
+<table id='words'>
+    <thead>
+        <tr> <th> Word <th> Count <th> Count of very similar words <th> Total <th> List of very similar words
+    <tbody>
+        {% for word in statistics %}
+        <tr> <td> {{ word.message }} <td> {{ word.count }} <td> {{ word.friends }} <td> {{ word.friends+word.count}} <td>
+            {% for fm in word.friend_message %}
+                {{ fm }}{% if loop.last==false %}, {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

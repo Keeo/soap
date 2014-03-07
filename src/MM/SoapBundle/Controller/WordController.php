@@ -18,6 +18,7 @@ class WordController extends Controller
      */
     public function insertWordAction($websiteName, $word)
     {
+        $websiteName = urldecode($websiteName);
         $wd = $this->get('word_diff');
         $wd->saveWord($word, $websiteName);
     }
@@ -28,10 +29,21 @@ class WordController extends Controller
      */
     public function getStatisticsAction($websiteName)
     {
-        $wr = $this->get('word_response');
-        $statistics = $wr->getStatistics($websiteName);
-        $response = new JsonResponse();
-        $response->setData($statistics);
-        return $response;
+        $websiteName = urldecode($websiteName);
+        $statistics = $this->get('word_response')->getStatistics($websiteName);
+        return new JsonResponse($statistics);
+    }
+    
+    /**
+     * @Route("/show/{websiteName}")
+     */
+    public function showStatisticsAction($websiteName)
+    {
+        $websiteName = urldecode($websiteName);
+        $statistics = $this->get('word_response')->getStatistics($websiteName, true);
+        return $this->render(
+            'MMSoapBundle:Word:showStatistics.html.twig',
+            array('statistics' => $statistics)
+        );
     }
 }

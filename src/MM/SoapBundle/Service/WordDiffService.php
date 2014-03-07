@@ -17,7 +17,7 @@ class WordDiffService extends WordAbstractService
     {
         $website = $this->getSite($site);
         
-        $word = $this->wordRepository->findOneByMessage($message);
+        $word = $this->wordRepository->findOneBy(['message'=>$message, 'website'=>$website]);
         if (empty($word)) {
             $word = new Word();
             $word->setMessage($message);
