@@ -24,7 +24,7 @@ class WordController extends Controller
     }
     
     /**
-     * @Route("/get/{websitename}")
+     * @Route("/get/{websiteName}")
      * @Template
      */
     public function getStatisticsAction($websiteName)
