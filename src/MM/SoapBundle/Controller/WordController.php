@@ -14,7 +14,7 @@ class WordController extends Controller
 {
     /**
      * @Route("/set/{websiteName}/{word}")
-     * @Template()
+     * @Template
      */
     public function insertWordAction($websiteName, $word)
     {
@@ -24,8 +24,8 @@ class WordController extends Controller
     }
     
     /**
-     * @Route("/get/{websiteName}")
-     * @Template()
+     * @Route("/get/{websitename}")
+     * @Template
      */
     public function getStatisticsAction($websiteName)
     {
@@ -36,15 +36,12 @@ class WordController extends Controller
     
     /**
      * @Route("/show/{websiteName}")
-     * @Template()
+     * @Template
      */
     public function showStatisticsAction($websiteName)
     {
         $websiteName = urldecode($websiteName);
         $statistics = $this->get('word_response')->getStatistics($websiteName, true);
-        return $this->render(
-            'MMSoapBundle:Word:showStatistics.html.twig',
-            array('statistics' => $statistics)
-        );
+        return array('statistics' => $statistics);
     }
 }
