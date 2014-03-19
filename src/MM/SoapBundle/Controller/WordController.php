@@ -19,7 +19,7 @@ class WordController extends Controller
     public function insertWordAction($websiteName, $word)
     {
         $websiteName = urldecode($websiteName);
-        $word = urldecode($word);
+        $word = base64_decode($word);
         
         $wd = $this->get('word_diff');
         $wd->saveWord($word, $websiteName);
